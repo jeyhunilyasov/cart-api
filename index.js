@@ -52,13 +52,10 @@ app.post('/placeOrder', (req, res) => {
 	let items = req.body.data;
 	let totalPrice = req.body.totalPrice;
 	const mailgun = require("mailgun-js");
-    const DOMAIN = "m.dodoairlin.es";
-    const api_key = "452b73b5d598ebae7f68cb080a6b2934-a2b91229-ce507dee";
     let html = `Discord name: ${discordName} <br>
     			Payment method: ${paymentType} <br>
     			`;
    	let cartItems = '<table style="text-align: left"><thead><th width="35%">Name</th><th width="30%">Variant ID</th><th>Unique Entry ID</th></thead><tbody>';
-   	console.log(items)
    	for(let i = 0 ; i < items.length; i ++) {
    		let temp = '<tr><td>' + items[i]['Name'] + '</td><td>' + items[i]['Variant ID'] + '</td><td>' + items[i]['Unique Entry ID'] + '</td></tr>';
    		cartItems += temp;
@@ -67,8 +64,8 @@ app.post('/placeOrder', (req, res) => {
     const mg = mailgun({ apiKey: api_key, domain: DOMAIN });
     const data = {
       from: "Dodo<me@lunarenigma.com>",
-      to: 'me@lunarenigma.com',
-      subject: "<" + discordName + "> <" + totalPrice + "> <" + paymentType + ">",
+      to: 'sweden.super.star@gmail.com',
+      subject: discordName + " " + totalPrice + " " + paymentType,
       html: html
     };
 
