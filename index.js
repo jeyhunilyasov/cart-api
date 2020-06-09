@@ -62,7 +62,6 @@ app.post('/api/placeOrder', (req, res) => {
 	let totalPrice = req.body.totalPrice;
 	const mailgun = require("mailgun-js");
     const DOMAIN = "m.dodoairlin.es";
-    const api_key = "452b73b5d598ebae7f68cb080a6b2934-a2b91229-ce507dee";
     let html = `Discord name: ${discordName} <br>
     			Payment method: ${paymentType} <br>
     			`;

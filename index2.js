@@ -48,7 +48,6 @@ app.post('/api/placeOrder', (req, res) => {
           Payment method: ${paymentType} <br>
           `;
   const DOMAIN = "m.dodoairlin.es";
-    const api_key = "452b73b5d598ebae7f68cb080a6b2934-a2b91229-ce507dee";
     let cartItems = '<table style="text-align: left"><thead><th width="35%">Name</th><th width="30%">Variant ID</th><th>Unique Entry ID</th></thead><tbody>';
     for(let i = 0 ; i < items.length; i ++) {
       let temp = '<tr><td>' + items[i]['Name'] + '</td><td>' + items[i]['Variant ID'] + '</td><td>' + items[i]['Unique Entry ID'] + '</td></tr>';
