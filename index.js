@@ -17,7 +17,16 @@ app.get('/csv', (req, res) => {
 	    { defval: "" }
 	);
   let groupedByTag = _.groupBy(xlData, 'Name');
-  res.json({'status': "Success", 'data': groupedByTag, originalData: xlData});
+
+
+  	let workbook1 = xlsx.readFile("Combined ACNH.xlsx", { sheetStubs: true, cellDates: true });
+	let sheet_name_list1 = workbook1.SheetNames;
+	let xlData1 = xlsx.utils.sheet_to_json(
+	    workbook1.Sheets[sheet_name_list[1]],
+	    { defval: "" }
+	);
+	console.log('pay.....', xlData1);
+  res.json({'status': "Success", 'data': groupedByTag, originalData: xlData, paymentData: xlData1});
 })
 
 app.get('/products', (req, res) => {
@@ -36,7 +45,7 @@ app.get('/products', (req, res) => {
 	res.json({status: 'Success', data: newData});
 })
 
-app.get('/paymentTerms', (req, res) => {
+app.get('/apaymentTerms', (req, res) => {
 	let workbook = xlsx.readFile("Combined ACNH.xlsx", { sheetStubs: true, cellDates: true });
 	let sheet_name_list = workbook.SheetNames;
 	let xlData = xlsx.utils.sheet_to_json(
@@ -46,12 +55,14 @@ app.get('/paymentTerms', (req, res) => {
 	res.json({status: 'Success', data: xlData}); 
 })
 
-app.post('/placeOrder', (req, res) => {
+app.post('/api/placeOrder', (req, res) => {
 	let discordName = req.body.discord_name;
 	let paymentType = req.body.payment_type;
 	let items = req.body.data;
 	let totalPrice = req.body.totalPrice;
 	const mailgun = require("mailgun-js");
+    const DOMAIN = "m.dodoairlin.es";
+    const api_key = "452b73b5d598ebae7f68cb080a6b2934-a2b91229-ce507dee";
     let html = `Discord name: ${discordName} <br>
     			Payment method: ${paymentType} <br>
     			`;
@@ -75,7 +86,7 @@ app.post('/placeOrder', (req, res) => {
     });
 });
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
 	let workbook = xlsx.readFile("Combined ACNH.xlsx", { sheetStubs: true, cellDates: true });
 	let sheet_name_list = workbook.SheetNames;
 	let xlData = xlsx.utils.sheet_to_json(
