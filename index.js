@@ -74,7 +74,7 @@ app.post('/api/placeOrder', (req, res) => {
     const mg = mailgun({ apiKey: api_key, domain: DOMAIN });
     const data = {
       from: "Dodo<me@lunarenigma.com>",
-      to: 'sweden.super.star@gmail.com',
+      to: 'me@lunarenigma.com',
       subject: discordName + " " + totalPrice + " " + paymentType,
       html: html
     };
